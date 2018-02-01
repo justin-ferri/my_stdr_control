@@ -1,6 +1,7 @@
 # my_stdr_control
 my_stdr_control is a package that will move the robot from the Simple 2-Dimensional Robot Simulator (STDR) from its initial position in the bottom left corner to the top left corner.
 
+Add this package to your ROS workspace. Then, use catkin_make to compile.
 ## Example usage
 Keep in mind that this code is derived from and utilizes code from Wyatt Newman's learning_ros repository which can be found here: https://github.com/wsnewman/learning_ros.
 

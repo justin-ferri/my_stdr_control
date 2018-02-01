@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
     //some "magic numbers"
     double sample_dt = 0.01; //specify a sample period of 10ms  
     double speed = 1.0; // 1m/s speed command
-    double yaw_rate = 0.5236; //0.5 rad/sec yaw rate command
+    double yaw_rate = 0.5236; //0.5236 rad/sec yaw rate command (.5236 is ~1/3 of a 90 degree angle in rad; more precise)
     double time_3_sec = 3.0; // should move 3 meters or 1.5 rad in 3 seconds
     
       
@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
           }
 
     twist_cmd.linear.x=0.0; //stop moving forward
-    twist_cmd.angular.z=yaw_rate * -1; //and start spinning in place - negative for turning clockwise
+    twist_cmd.angular.z=yaw_rate * -1; //and start spinning in place - negative for turning clockwise - rotating right 90 degrees
     timer=0.0; //reset the timer
     while(timer<time_3_sec) {
           twist_commander.publish(twist_cmd);
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     twist_cmd.angular.z=0.0; //and stop spinning in place 
     twist_cmd.linear.x=speed; //and move forward again
     timer=0.0; //reset the timer
-    while(timer<3.5) { //move for 3.5 seconds - 3.5 meters to the right (defined by time)
+    while(timer<3.5) { //move for 3.5 seconds - 3.5 meters to the right (defined by time) - rotating was the previous step so we're now moving forward right
           twist_commander.publish(twist_cmd);
           timer+=sample_dt;
           loop_timer.sleep();
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
     twist_cmd.linear.x=0.0; //stop moving forward
     twist_cmd.angular.z=yaw_rate; //and start spinning in place
     timer=0.0; //reset the timer
-    while(timer<time_3_sec) { //spin counterclockwise to face up
+    while(timer<time_3_sec) { //spin counterclockwise to face up - 90 degrees
           twist_commander.publish(twist_cmd);
           timer+=sample_dt;
           loop_timer.sleep();
@@ -83,7 +83,7 @@ int main(int argc, char **argv) {
     twist_cmd.angular.z=0.0; //and stop spinning in place 
     twist_cmd.linear.x=speed; //and move forward again
     timer=0.0; //reset the timer
-    while(timer<2) { //move for 2 seconds (2 meters) forward (up)
+    while(timer<2.25) { //move for 2.25 seconds (2.25 meters) forward (up)
           twist_commander.publish(twist_cmd);
           timer+=sample_dt;
           loop_timer.sleep();
@@ -92,7 +92,7 @@ int main(int argc, char **argv) {
     twist_cmd.linear.x=0.0; //stop moving forward
     twist_cmd.angular.z=yaw_rate; //and start spinning in place
     timer=0.0; //reset the timer
-    while(timer<time_3_sec) { //spin such that the robot is facing left
+    while(timer<time_3_sec) { //spin such that the robot is facing left - 90 degrees counterclockwise
           twist_commander.publish(twist_cmd);
           timer+=sample_dt;
           loop_timer.sleep();
